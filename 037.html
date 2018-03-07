@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>037</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "036" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "038" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+
+                             How to test - Mocking
+        
+        use Test2::Tools::Mock;
+        
+        my $mock = mock 'Some::Class' =&gt; (
+            add =&gt; [
+                new_method =&gt; sub { ... },
+            ],
+            override =&gt; [
+                replace_method =&gt; sub { ... },
+            ],
+        );
+         
+        Some::Class-&gt;new_method();        # Calls the newly injected method
+        Some::Class-&gt;replace_method();    # Calls our replacement method.
+
+
+
+
+
+
+</pre>
+</body>

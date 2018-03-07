@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>033</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "032" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "034" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+
+                             How to test - Code II
+        
+            is($returned_gadgets, 0, &quot;We got 0 gadgets returned&quot;);
+        
+            ok(&quot;0 but true&quot;,
+                   &quot;should always succeed&quot;,
+                   &quot;Perl deprecated the '0 but true' feature!&quot;); 
+            
+            SKIP: {
+                skip &quot;This will wipe your drive&quot;;
+                # This never gets run:
+                ok(!system('sudo rm -rf /'), &quot;Wipe drive&quot;);
+            }
+            
+            done_testing;
+
+
+
+
+
+
+</pre>
+</body>

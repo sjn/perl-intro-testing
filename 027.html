@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>027</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "026z" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "028" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+
+
+
+                         The fundamentals - TAP Example
+        
+            1..7
+            ok 1 - Loaded data correctly
+            ok 2 - Generated correct internal representation
+            ok 3 - Extracted nodes by name
+            not ok 4 - Extracted node by unique key
+            # Expected: { name =&gt; 'Arne', ID =&gt; 1337 }
+            #      Got: undef
+            ok 5 - OO interface works # SKIP (Moose not installed)
+            not ok 6 â Functional interface works # TODO
+            ok 7 - Saved data correctly
+
+
+
+
+
+
+
+</pre>
+</body>

@@ -12,7 +12,7 @@ indent: 8
 auto_size: 1
 #vim_opts: '-u NONE'
 vim_opts: ''
-skip: 1
+skip: 0
 vimrc: |
     " Presentation remote has three buttons
     " forward: sends PageDown
@@ -27,9 +27,9 @@ vimrc: |
     "set verbose=9
     "set background=light
     "colorscheme solarized
-    autocmd FileType ansi source ~/.vim/bundle/AnsiEsc/autoload/AnsiEsc.vim
-    autocmd FileType ansi exe "normal! AnsiEsc"
-    autocmd BufRead,BufNewFile *.asm set filetype=masm
+    "autocmd FileType ansi source ~/.vim/bundle/AnsiEsc/autoload/AnsiEsc.vim
+    "autocmd FileType ansi exe "normal! AnsiEsc"
+    "autocmd BufRead,BufNewFile *.asm set filetype=masm
     " autocmd BufNewFile,BufRead *.ansi exe "normal! :AnsiEsc"
 
 ---- i0

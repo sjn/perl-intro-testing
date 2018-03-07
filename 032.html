@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>032</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "031z" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "033" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+                              How to test - Code I
+        
+            use Test2::Tools::Basic;
+            
+            ok($x, &quot;simple test&quot;);
+            
+            if ($passing) { pass('a passing test'); }
+            else          { fail('a failing test'); }
+             
+            diag &quot;This is a diagnostics message on STDERR&quot;;
+            note &quot;This is a diagnostics message on STDOUT&quot;;
+            
+            {
+                my $todo = todo &quot;Reason for todo&quot;;
+                ok(0, &quot;this test is todo&quot;);
+            }
+            
+            ok(1, &quot;this test is not todo&quot;);
+
+
+
+
+</pre>
+</body>

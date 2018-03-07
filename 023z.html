@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>023z</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "023c" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "024" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+
+
+
+
+
+
+                         How to test - common mistakes
+        
+        - Poorly designed tests can give false confidence!
+        - Tests should help with debugging, but not produce false positives
+        - Don't only test the easy stuff
+        - If your system has both a web- and a commandline interface, test both!
+
+
+
+
+
+
+
+
+
+
+</pre>
+</body>
