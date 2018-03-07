@@ -1,0 +1,6 @@
+0*
+*.swp
+*~
+.help
+.vimrc
+run.slide

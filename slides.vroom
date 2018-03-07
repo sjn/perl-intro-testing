@@ -1,0 +1,361 @@
+== This is a sample Vroom input file. It should help you get started.
+#
+# Edit this file with your content. Then run `vroom --vroom` to start
+# the show!
+#
+# See `perldoc Vroom` for complete details.
+#
+---- config
+# Basic config options.
+title: Testing with Perl
+indent: 8 
+auto_size: 1
+#vim_opts: '-u NONE'
+vim_opts: ''
+skip: 1
+vimrc: |
+    " Presentation remote has three buttons
+    " forward: sends PageDown
+    " back: sends PageUp
+    " blank: sends b
+    " Bind PageUp to previous doc and PageDown to next doc
+    map <PAGEUP> :N<CR>:<CR>gg
+    map <PAGEDOWN> :n<CR>:<CR>gg
+    set colorcolumn=0
+    set nonumber
+    set listchars=trail:\ 
+    "set verbose=9
+    "set background=light
+    "colorscheme solarized
+    autocmd FileType ansi source ~/.vim/bundle/AnsiEsc/autoload/AnsiEsc.vim
+    autocmd FileType ansi exe "normal! AnsiEsc"
+    autocmd BufRead,BufNewFile *.asm set filetype=masm
+    " autocmd BufNewFile,BufRead *.ansi exe "normal! :AnsiEsc"
+
+---- i0
+,--------------v-----------------------------------------------v--------------.
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+|              |                                               |              |
+`--------------^-----------------------------------------------^--------------'
+---- center
+An overview of Testing with Perl
+
+
+Salve J. Nilsen <sjn@foo.no>
+
++Based on Damian Conway's test class + own notes
+----
+== Goals for this talk
+
+- Introduce you to the why's & when's of testing
++- Overview of common testing patterns
++- Practical examples
++- ...and pointers to where one can learn more
+----
+== Goals for this talk (caveats)
+
+- We have only 2 hours
+- ...So we can't Cover it all 
++- I might have forgotten things
++  - Feel free to ask as we go
++  - or add something!
+----
+== Why and when test?
+
+----
+== Why test?
+
+- Designing an API?
++  - "Design-by-coding" works well
++  - Shape the API so it's easy to use
+----
+== Why test?
+
+- Detecting design flaws?
++  - If your API is difficult to test, it's difficult to use
++  - Identify missing parts early
+----
+== Why test?
+
+- Structuring
++  - Tests help with creating more modular and smaller code
++  - It's easier to test decoupled code
+----
+== Why test?
+
+- Verify the implementation
++  - "Does the software work as expected?"
++  - Manual verification is expensive and error-prone
+----
+== Why test?
+
+- Avoid regressions
++  - Catching errors early in released code is especially important
++  - Tests help reduce maintainance costs
++- Maintainance takes the most of software lifecycle time! (~80%)
++  - https://en.wikipedia.org/wiki/Software_maintenance
+----
+== Why test?
+
+- Detect breakage in dependencies
++  - Some fixes break backward compatibility
++  - If you depend on these, your tests may detect breakage early
+----
+== Limits of testing
+
+- Tests are code, and code can have
++  - bugs
++  - design errors
++  - report false positives or false negatives
++  - failure modes
+----
+== Limits of testing
+
+- Be skeptical of your tests
++  - Fix errors in your tests too
++  - If you don't understand the tests, you don't know if they're right
++  - Simplicity in your API is just as important as in your tests
+----
+== When to test - TDD & refactoring
+
+- Red/Green/Refactor development
++ - Write a failing test
++ - Implement the behaviour for this test
++ - Refactor as necessary
++ - If test is red (not ok), code it.
++ - If test is green (ok), write a new failing test & repeat
+----
+== When to test - designing
+
+- "Design by testing"
++ - Create a test suite before implementation
++ - Useful for exploring different designs
+
+----
+== When to test - debugging/rewriting
+
+- If you're struggling with implementing a feature: Debug or rewrite?
++- Often it's better to revert and rewrite!
++- Think of it as "implementing one to throw away"
++- "Micro-prototyping"
+----
+== How to test - unit tests
+
+- Low-level tests
++- Check if a single component ("unit") works as expected in isolation
++- Focus on verifying behaviour in single class or module
++- Tip: Gather all tests for one component in one .t file
+----
+== How to test - integration tests
+
+- Test if components interact correctly with each other
++- Examine "real" application usage
++- Set up necessary state
++- do multiple operations
++- check if end state is as expected
++- May require caching exceptions, I/O or inspecting other output
+----
+== How to test - coverage
+
+- Are the tests excercising all parts of your code?
++- If not, then you may miss situations when something breaks
++- Use coverage tools to check it. (e.g. Devel::Cover on CPAN)
+----
+== How to test - documented behaviour
+
+- Full coverage is difficultto reach
++- Start with documented behaviour
++- Don't just test public API, but also test error conditions
+----
+== How to test - edge cases
+
+- Some APIs break when they receive bad data
++- Max & min values
++- Control characters (e.g. \0)
++- undef, empty strings, empty lists, empty hashes
++- Unusual booleans (e.g. 'true', 'false', '0E0', '0 but true', etc.) 
+----
+== How to test - component independance
+
+- Are your modules tightly coupled?
++- Don't reuse objects
++- Isolate using subtests, each with a new object to test
++- Be careful with generating tests! Start with a fresh state.
++- Arrange, Act, Assert
++- Use "prove --shuffle" to randomize tests
+----
+== How to test - common mistakes
+
+- Poorly designed tests can give false confidence!
++- Tests should help with debugging, but not produce false positives
++- Don't only test the easy stuff
++- If your system has both a web- and a commandline interface, test both!
+----
+== How to test - common mistakes
+
+- Generating tests from code output
++- Run code, produce output, put this into the test
++- Works if you need to produce the same value
++- Are you using this to inspect deep/complex data structures?
++- You may be enshrining a complex API
+----
+== How to test - common mistakes
+
+- Maintainability of test code
++- Tests are code, so spend some time to make it understandable
++- Understandability > Correctness > Speed
++- Use test annotations, diag/note calls, comments and good naming!
+
+----
+== The fundamentals - TAP
+
+- Test Anything Protocol
++- Three parts: Harness (consumes TAP), Tests (produces TAP), the protocol
++- Simple way to report test status, invented by Larry Wall
++- http://testanything.org
+----
+== The fundamentals - TAP Example
+
+    1..7
+    ok 1 - Loaded data correctly
+    ok 2 - Generated correct internal representation
+    ok 3 - Extracted nodes by name
+    not ok 4 - Extracted node by unique key
+    # Expected: { name => 'Arne', ID => 1337 }
+    #      Got: undef
+    ok 5 - OO interface works # SKIP (Moose not installed)
+    not ok 6 – Functional interface works # TODO
+    ok 7 - Saved data correctly
+----
+== How to test - core toolchain
+
+- prove(1)
++- Default commandline tool for TAP::Harness
++- gathers output from tests, and reports success nicely
++- make test || ./Build test || minil test
+----
+== The fundamentals - Report example
+
+    $ prove t/example.t
+    t/example.t .. Failed 1/7 subtests 
+      (less 1 skipped subtest: 5 okay)
+    
+      Test Summary Report
+      -------------------
+      t/example.t (Wstat: 0 Tests: 7 Failed: 1)
+        Failed test:  4
+        Files=1, Tests=7,  0 wallclock secs ( 0.02 usr +  0.00 sys =  0.02 CPU)
+        Result: FAIL
+----
+== The fundamentals - Report example
+
+    $ prove t/example.t
+    $ t/example.t
+----
+== How to write test - Test2
+
+- Test2::Bundle::Simple
++- Backward compatible with Test::Simple
++- Easy upgraded to more advanced Testing modules
++- Test::More, Test::Class, Test::Mock and more
++  - Overview at Test2::Suite
+----
+== How to test - Code I
+
+    use Test2::Tools::Basic;
+    
+    ok($x, "simple test");
+    
+    if ($passing) { pass('a passing test'); }
+    else          { fail('a failing test'); }
+     
+    diag "This is a diagnostics message on STDERR";
+    note "This is a diagnostics message on STDOUT";
+    
+    {
+        my $todo = todo "Reason for todo";
+        ok(0, "this test is todo");
+    }
+    
+    ok(1, "this test is not todo");
+    
+----
+== How to test - Code II
+
+    is($returned_gadgets, 0, "We got 0 gadgets returned");
+
+    ok("0 but true",
+           "should always succeed",
+           "Perl deprecated the '0 but true' feature!"); 
+    
+    SKIP: {
+        skip "This will wipe your drive";
+        # This never gets run:
+        ok(!system('sudo rm -rf /'), "Wipe drive");
+    }
+    
+    done_testing;
+----
+== How to test - exiting
+
+- done_testing() instead of 1..n
++- bail_out() if something goes horribly wrong
+----
+== How to test - useful modules
+
+- Test::Differences
+- Testing side-effects (Test::Warn, Test::Exception, Test::Output, Test::Trap)
+
+----
+== How to test - Mojolicious
+
+- Test::Mojo
+
+----
+== How to test - Mocking
+
+use Test2::Tools::Mock;
+
+my $mock = mock 'Some::Class' => (
+    add => [
+        new_method => sub { ... },
+    ],
+    override => [
+        replace_method => sub { ... },
+    ],
+);
+ 
+Some::Class->new_method();        # Calls the newly injected method
+Some::Class->replace_method();    # Calls our replacement method.
+  
+----
+== How to test - core toolchain
+
+---- center
++ - 
+---- center
+== Online
+----
+== Online
+
+---- center
+== Q's, A's and C's
+
+---- center
+== Thank you!
+
+Salve J. Nilsen <sjn@foo.no>
+
+@sjoshuan
